@@ -10,6 +10,11 @@
 
 
 /* ---- Base Rules ---- */
+:root {
+    --dark-blue: rgb(20, 20, 70);
+    --dark-green: rgb(81, 131, 107);
+    --light-green: rgba(136,203,171,1);
+}
 *{
     padding:0;
     margin: 0;
@@ -71,6 +76,11 @@ section {
 .header__nav {
     box-shadow: 0 0 5px 5px rgba(1, 1, 11, 0.775);
     background-color: rgba(254, 254, 254, 0.678);
+    min-height: 2.6em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .header__nav ul {
@@ -91,12 +101,14 @@ section {
     text-align: center;
     padding-inline: 5px;
     border-radius: 6px;
-    background-color: rgb(20, 20, 70);
+    background-color: var(--dark-blue)
 }
-.header__nav li:hover{
+.header__nav li:hover,.header__nav li.active{
     cursor: pointer;
-    scale:1.03;
+    scale:1.04;
+    background-color: var(--dark-green);
 }
+
 
 .header__nav .menu__link {
     display: block;
@@ -117,9 +129,9 @@ section {
     background: none;
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     z-index: 5;
-    
 }
 
 /* Footer Styles */
@@ -245,4 +257,57 @@ section.your-active-class .landing__container::after {
 		           translate(-1em) 
 		           rotate(-360deg);
 	}
+}
+
+/* Show/Hide Fucntionallity */
+@media screen and (min-width: 850px) {
+    .nav__btn{
+        display:none;
+    }
+}
+@media screen and (max-width: 850px) {
+
+    .header__nav ul {
+        display: none;
+    }
+    .nav__btn {
+        display: inline;
+    }
+}
+
+.nav__btn {
+    padding:4px 12px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-family: sans-serif;
+    background-color: var(--dark-blue);
+    margin-inline: 35px;
+    border-radius: 6px;
+}
+
+.header__nav.aside {
+    box-shadow: none;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.page__header.aside{
+    width: fit-content;
+    max-width: 60%;
+    height: 100%;
+}
+.header__nav.aside ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.header__nav.aside li {
+    margin-bottom: 12px;
+}
+.header__nav.aside .nav__btn {
+    align-self: flex-end;
+    margin:12px 12px 12px 90px;
+    background:none;
+    color:var(--dark-blue)
 }

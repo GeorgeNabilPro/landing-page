@@ -1,17 +1,3 @@
-/**
- * 
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- * 
- * Dependencies: None
- * 
- * JS Version: ES2015/ES6
- * 
- * JS Standard: ESlint
- * 
-*/
 
 var allSections = document.querySelectorAll("section")
 const secN = allSections.length
@@ -31,7 +17,7 @@ function smoothScroll(target) {
 }
 
 for (let i=0; i<secN; i++) {
-    const sectionName = allSections[i].id;
+    const sectionName = allSections[i].getAttribute('data-nav');
 
     const li = document.createElement('li');
     li.textContent = sectionName;
@@ -61,7 +47,6 @@ document.addEventListener('scroll',function checkAndActivate(evt){
     for (let i=0;i<secN;i++) {
         let secRef = navList.children[i]
         let section = allSections[i]
-        console.log(section.getBoundingClientRect().top)
         if ((section.getBoundingClientRect().top <= 350) && (section.getBoundingClientRect().top > 0)) {
             activate(secRef.id)
         }
@@ -71,3 +56,21 @@ document.addEventListener('scroll',function checkAndActivate(evt){
 
 const nav = document.querySelector(".header__nav")
 nav.appendChild(navList)
+
+
+// Making a responsive nav menu
+const header = document.querySelector(".page__header")
+const navBtn = document.querySelector(".nav__btn")
+
+navBtn.addEventListener('click',function (evt) {
+    navBtn.classList.toggle('clicked')
+    if (navBtn.classList.contains('clicked')) {
+        header.classList.add("aside")
+        nav.classList.add("aside")
+        navBtn.innerHTML = `<i class="fa-solid fa-angles-left"></i>`
+    } else {
+        header.classList.remove("aside")
+        nav.classList.remove("aside")
+        navBtn.innerHTML = `<i class="fa-solid fa-bars"></i> topics`
+    }
+})
